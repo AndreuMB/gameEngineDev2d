@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 297cf44370d895f43bddb01ab43e1cc1
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - CHARLES GEORGE
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 01af95bda40eb9340b4d42ad79064108, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

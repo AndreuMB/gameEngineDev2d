@@ -476,8 +476,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -391.19574, y: 245.86932}
-  m_SizeDelta: {x: 296.3416, y: 74.5274}
+  m_AnchoredPosition: {x: -392.44196, y: 260.4087}
+  m_SizeDelta: {x: 293.8492, y: 45.4488}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &455689522
 MonoBehaviour:
@@ -766,9 +766,11 @@ GameObject:
   - component: {fileID: 1010240149}
   - component: {fileID: 1010240151}
   - component: {fileID: 1010240150}
+  - component: {fileID: 1010240153}
+  - component: {fileID: 1010240152}
   m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
+  m_Name: LifeBar
+  m_TagString: Life
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -790,8 +792,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -374, y: 174.41}
-  m_SizeDelta: {x: 199.8026, y: 68.3959}
+  m_AnchoredPosition: {x: -450, y: 186.26}
+  m_SizeDelta: {x: 164.0226, y: 53.8603}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010240150
 MonoBehaviour:
@@ -831,6 +833,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010240148}
   m_CullTransparentMesh: 1
+--- !u!114 &1010240152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010240148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b3ccf2bf9a88a4486543ea5ac7f0e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1010240153
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010240148}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 97b280cc190ba2d49a8ef97186f13d29, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1014326208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,7 +1429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1768795083
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1465,7 +1499,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768795082}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7b3ccf2bf9a88a4486543ea5ac7f0e4, type: 3}
   m_Name: 

@@ -66,8 +66,10 @@ public class SimpleControllerX : MonoBehaviour
         if (other.gameObject.tag=="Enemy")
         {
             GameObject sys =  GameObject.FindWithTag("System");
+            upgrade = false;
             life--;
-            lifeText.GetComponent<Text>().text = life.ToString();
+            lifeText.GetComponent<LifeCount>().UpdateLife();
+            // lifeText.GetComponent<Text>().text = life.ToString();
             FindObjectOfType<AudioManager>().Play("SpaceshipExplosion");
             if (life <= 0)
             {
@@ -89,7 +91,8 @@ public class SimpleControllerX : MonoBehaviour
             if (life<3)
             {
                 life++;
-                lifeText.GetComponent<Text>().text = life.ToString();
+                lifeText.GetComponent<LifeCount>().UpdateLife();
+                // lifeText.GetComponent<Text>().text = life.ToString();
             }
             Destroy(other.gameObject);
         }

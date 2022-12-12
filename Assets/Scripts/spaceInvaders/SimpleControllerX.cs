@@ -86,8 +86,11 @@ public class SimpleControllerX : MonoBehaviour
         }
         else if(other.gameObject.tag=="LifeUp"){
             FindObjectOfType<AudioManager>().Play("GetObject");
-            life++;
-            lifeText.GetComponent<Text>().text = life.ToString();
+            if (life<3)
+            {
+                life++;
+                lifeText.GetComponent<Text>().text = life.ToString();
+            }
             Destroy(other.gameObject);
         }
     }

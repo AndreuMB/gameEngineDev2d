@@ -47,6 +47,7 @@ public class SimpleControllerX : MonoBehaviour
         }
 
         if (Input.GetKeyDown("space")){
+            FindObjectOfType<AudioManager>().Play("LaserBullet");
             Instantiate(bullet, transform.position, Quaternion.identity);
         }
 
@@ -61,26 +62,32 @@ public class SimpleControllerX : MonoBehaviour
     // }
 
     void OnCollisionEnter2D(Collision2D other) {
+        GameObject lifeText =  GameObject.FindWithTag("Life");
         if (other.gameObject.tag=="Enemy")
         {
             GameObject sys =  GameObject.FindWithTag("System");
             life--;
-            GameObject lifeText =  GameObject.FindWithTag("Life");
             lifeText.GetComponent<Text>().text = life.ToString();
+            FindObjectOfType<AudioManager>().Play("SpaceshipExplosion");
             if (life <= 0)
             {
                 animator.SetBool("destroyedSpaceship",true);
+                FindObjectOfType<AudioManager>().Play("GameOver");
+                FindObjectOfType<AudioManager>().Stop("MainTheme");
                 StartCoroutine(destroySpaceshipCoroutine());
                 sys.GetComponent<GameSystem>().setGameOver(true);
             }else{
                 StartCoroutine(inmunityCoroutine());
             }
         }else if(other.gameObject.tag=="Upgrade"){
+            FindObjectOfType<AudioManager>().Play("GetObject");
             upgrade = true;
             Destroy(other.gameObject);
         }
         else if(other.gameObject.tag=="LifeUp"){
+            FindObjectOfType<AudioManager>().Play("GetObject");
             life++;
+            lifeText.GetComponent<Text>().text = life.ToString();
             Destroy(other.gameObject);
         }
     }

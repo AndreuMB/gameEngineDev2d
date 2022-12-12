@@ -9,6 +9,9 @@ public class BulletMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject player = GameObject.FindWithTag("Player");
+        bool upgrade = player.GetComponent<SimpleControllerX>().getUpgrade();
+        if (upgrade) setLevel1();
         StartCoroutine(bulletMovementCoroutine());
     }
 
@@ -35,15 +38,19 @@ public class BulletMovement : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.tag != "Player" && level < 1)
+        if (other.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject);
             GameObject.FindWithTag("Score").GetComponent<PointCount>().addPoint();
+            if (level < 1)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     public void setLevel1(){
+        print("enter set level1");
         level = 1;
-        GetComponent<Animator>().runtimeAnimatorController = Resources.Load("") as RuntimeAnimatorController;
+        GetComponent<Animator>().runtimeAnimatorController = Resources.Load("Bullet2C") as RuntimeAnimatorController;
     }
 }

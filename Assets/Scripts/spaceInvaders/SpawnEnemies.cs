@@ -57,7 +57,8 @@ public class SpawnEnemies : MonoBehaviour
             spawnZone = Random.Range(-cameraWidth,cameraWidth);
             spawnPoint = new Vector2(spawnZone, cameraHeight+2);
             Instantiate(help, spawnPoint, Quaternion.identity);
-            yield return new WaitForSeconds(5);
+            // yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(Random.Range(7,15));
         };
     }
 

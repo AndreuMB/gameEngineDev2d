@@ -42,6 +42,8 @@ public class EnemyMovementSI : MonoBehaviour
         {
             animator.SetBool("Destroyed",true);
             destroyB = true;
+            // play audio
+            FindObjectOfType<AudioManager>().Play("AsteroidExplosion");
             StartCoroutine(destroyAsteroidCoroutine());
         }
     }

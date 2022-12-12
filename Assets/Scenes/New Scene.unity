@@ -225,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.02
   bullet: {fileID: 465100724750334402, guid: d7ae3484586fb764ba15b8b4b7a7683b, type: 3}
-  life: 3
+  life: 1
 --- !u!50 &34965234
 Rigidbody2D:
   serializedVersion: 4
@@ -673,6 +673,87 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &827502196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827502198}
+  - component: {fileID: 827502197}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &827502197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827502196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fdb3f14c975d440bca9ea7f6377f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MainTheme
+    clip: {fileID: 8300000, guid: 869e60d763b5540469a8b594eefe8b32, type: 3}
+    volume: 0.15
+    loop: 1
+    autoplay: 1
+    source: {fileID: 0}
+  - name: AsteroidExplosion
+    clip: {fileID: 8300000, guid: b694f74906b4c6747a825da892c88188, type: 3}
+    volume: 0.3
+    loop: 0
+    autoplay: 0
+    source: {fileID: 0}
+  - name: SpaceshipExplosion
+    clip: {fileID: 8300000, guid: 2cd8976d3faf7de45a3ec57ed39baa98, type: 3}
+    volume: 0.3
+    loop: 0
+    autoplay: 0
+    source: {fileID: 0}
+  - name: LaserBullet
+    clip: {fileID: 8300000, guid: 62afd38d521f79b4b89014c4b5ba3be6, type: 3}
+    volume: 0.6
+    loop: 0
+    autoplay: 0
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 195d635ad40b7924fa268279bf6706d6, type: 3}
+    volume: 1
+    loop: 0
+    autoplay: 0
+    source: {fileID: 0}
+  - name: GetObject
+    clip: {fileID: 8300000, guid: d50b7d789b799b1408d7953e91c2a1dc, type: 3}
+    volume: 0.3
+    loop: 0
+    autoplay: 0
+    source: {fileID: 0}
+--- !u!4 &827502198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827502196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.61071485, y: 1.5317154, z: -0.07361931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1014326208
 GameObject:

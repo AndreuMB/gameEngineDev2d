@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SimpleControllerX : MonoBehaviour
 {
-    [Range(0,1)][SerializeField] float speed;
+    [Range(0,6)][SerializeField] float speed;
     SpriteRenderer sprite;
     float cameraWidth;
     float cameraHeight;
@@ -30,7 +30,7 @@ public class SimpleControllerX : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         // float horizontal = Input.GetAxis("Horizontal");
@@ -45,12 +45,14 @@ public class SimpleControllerX : MonoBehaviour
             Vector3 direction = new Vector3(horizontal,0,0);
             transform.position += direction * speed;
         }
+    }
 
-        if (Input.GetKeyDown("space")){
+    void Update()
+    {
+       if (Input.GetKeyDown("space")){
             FindObjectOfType<AudioManager>().Play("LaserBullet");
             Instantiate(bullet, transform.position, Quaternion.identity);
         }
-
     }
 
     // void OnCollisionEnter2D(Collision2D other) {

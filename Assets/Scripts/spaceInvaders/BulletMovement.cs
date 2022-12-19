@@ -49,7 +49,6 @@ public class BulletMovement : MonoBehaviour
     }
 
     public void setLevel1(){
-        print("enter set level1");
         level = 1;
         GetComponent<Animator>().runtimeAnimatorController = Resources.Load("Bullet2C") as RuntimeAnimatorController;
     }

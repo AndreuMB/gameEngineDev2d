@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TimerSpace : MonoBehaviour
 {
+    int timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,16 +16,16 @@ public class TimerSpace : MonoBehaviour
         // start
         Text timerText = GetComponent<Text>();
         GameObject sys =  GameObject.FindWithTag("System");
-        int i = 0;
+        timer = 0;
 
         // running
         while (!sys.GetComponent<GameSystem>().getGameOver())
         {
-            int minutes = Mathf.FloorToInt(i / 60F);
-            int seconds = Mathf.FloorToInt(i % 60F);
+            int minutes = Mathf.FloorToInt(timer / 60F);
+            int seconds = Mathf.FloorToInt(timer % 60F);
             timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
             yield return new WaitForSeconds(1);
-            i++;
+            timer++;
         }
 
         // end

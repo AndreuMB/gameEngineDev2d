@@ -22,12 +22,25 @@ public class SpawnEnemies : MonoBehaviour
         Vector2 spawnPoint;
 
         GameObject sys =  GameObject.FindWithTag("System");
+        float faster = 0f;
+        float spawnTime = 1f;
+        float increase=0;
+        enemy.GetComponent<EnemyMovementSI>().setSpeed(1);
         while (!sys.GetComponent<GameSystem>().getGameOver()) // not game over
         {
             spawnZone = Random.Range(-cameraWidth,cameraWidth);
             spawnPoint = new Vector2(spawnZone, cameraHeight+2);
-            Instantiate(enemy, spawnPoint, Quaternion.identity);
-            yield return new WaitForSeconds(1);
+
+            
+
+            GameObject enemyX = Instantiate(enemy, spawnPoint, Quaternion.identity);
+            float speedEnemy = enemyX.GetComponent<EnemyMovementSI>().getSpeed();
+            if (speedEnemy < 0.7) increase += 0.001f;
+            speedEnemy += increase;
+            enemyX.GetComponent<EnemyMovementSI>().setSpeed(speedEnemy);
+
+            if ((spawnTime-faster) > 0.3) faster += 0.01f;
+            yield return new WaitForSeconds(spawnTime-faster);
         };
     }
 

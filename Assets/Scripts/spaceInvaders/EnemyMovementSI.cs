@@ -6,6 +6,7 @@ public class EnemyMovementSI : MonoBehaviour
 {
     float speed=0.02f;
     Animator animator;
+    float time = 0.01f;
     bool destroyB = false;
     // Start is called before the first frame update
     void Start()
@@ -17,16 +18,18 @@ public class EnemyMovementSI : MonoBehaviour
     IEnumerator enemyMovementCoroutine(){
         Camera cam = Camera.main;
         float cameraHeight = cam.orthographicSize;
+        
         while (transform.position.y>-cameraHeight-2 && !destroyB) // enemy in screen
         {
+            print("speed2 = "+speed);
             transform.Translate(0,-speed,0);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(time);
         }
         if (!destroyB)
         {
             GameObject points =  GameObject.FindWithTag("Score");
             points.GetComponent<PointCount>().removePoint();
-            Destroy(gameObject);    
+            Destroy(gameObject);
         }
     }
 
@@ -54,5 +57,12 @@ public class EnemyMovementSI : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         Destroy(gameObject);
+    }
+
+    public float getSpeed(){
+        return speed;
+    }
+    public void setSpeed(float speedInput){
+        speed = speedInput;
     }
 }

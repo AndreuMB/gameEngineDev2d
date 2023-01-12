@@ -56,7 +56,7 @@ public class ControllerDG : MonoBehaviour
 
     void FixedUpdate()
     {
-        Rigidbody2D rigidboy = GetComponent<Rigidbody2D>();
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(horizontal, vertical);
@@ -67,18 +67,18 @@ public class ControllerDG : MonoBehaviour
             // + "direction y = " + direction.y);
 
             if(direction.x>0){
-                rigidboy.MoveRotation(270);
+                rigidbody.MoveRotation(270); // right
             }else if(direction.x<0){
-                rigidboy.MoveRotation(90);
+                rigidbody.MoveRotation(90); // left
             }else if(direction.y>0){
-                rigidboy.MoveRotation(0);
+                rigidbody.MoveRotation(0); // up
             }else if(direction.y<0){
-                rigidboy.MoveRotation(180);
+                rigidbody.MoveRotation(180); // down
             }
         }
         
         // if rigidbody
-        rigidboy.MovePosition((Vector2) transform.position + direction * speed * Time.deltaTime);
+        rigidbody.MovePosition((Vector2) transform.position + direction * speed * Time.deltaTime);
 
     }
 

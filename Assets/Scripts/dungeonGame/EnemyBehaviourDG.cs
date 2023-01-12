@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyBehaviourDG : MonoBehaviour
 {
+    [SerializeField] float speed = 5f;
 void Start()
     {
-        // Me suscribo con la función CambiaColor()
         ControllerDG.killAll.AddListener(killAll);
         ControllerDG.kill.AddListener(kill);
     }
@@ -33,5 +33,17 @@ void Start()
     void Update()
     {
         
+    }
+
+    void FixedUpdate()
+    {
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        GameObject target = GameObject.FindGameObjectWithTag("Player");
+        // transform.LookAt(target.transform); // only work 3d
+        transform.right = target.transform.position - transform.position;
+
+        Vector2 newPosition = Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * speed);
+        rigidbody.MovePosition(newPosition);
+
     }
 }

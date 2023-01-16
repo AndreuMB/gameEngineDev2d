@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyBehaviourDG : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
-void Start()
+    float damage = 1;
+    float scoreValue = 10;
+    public static UnityEvent addScore = new UnityEvent();
+    
+    void Start()
     {
         ControllerDG.killAll.AddListener(killAll);
         ControllerDG.kill.AddListener(kill);
@@ -14,18 +19,22 @@ void Start()
     void killAll()
     {
         print("killAll");
-        Destroy(gameObject);
+        death();
     }
 
     void kill(){
         print("kill");
+    }
+    void death(){
+        addScore.Invoke();
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D other){
         print("enter enemy collision");
         if (other.gameObject.tag == "Attack")
         {
-            Destroy(gameObject);
+            death();
         }
     }
 
@@ -45,5 +54,13 @@ void Start()
         Vector2 newPosition = Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * speed);
         rigidbody.MovePosition(newPosition);
 
+    }
+
+    public float getDamage(){
+        return damage;
+    }
+
+    public float getScoreValue(){
+        return scoreValue;
     }
 }

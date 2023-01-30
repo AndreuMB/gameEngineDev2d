@@ -5,7 +5,7 @@ public class Restart : MonoBehaviour
 {
 
     void Start () {
-
+        gameObject.SetActive(false);
 	}
 
 	public void TaskOnClick(){

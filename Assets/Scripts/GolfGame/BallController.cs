@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class BallController : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class BallController : MonoBehaviour
     [SerializeField] GameObject thrustUI; 
     Vector3 lastPos;
     bool move;
+    public static UnityEvent shoot = new UnityEvent();
+    [SerializeField] GameObject thrustBar;
+    Animator animator;
     void Start()
     {
         directionArrow = gameObject.transform.GetChild(0);
@@ -21,6 +25,7 @@ public class BallController : MonoBehaviour
         thrustUI.SetActive(false);
         thrust = 5.0f;
         StartCoroutine(moveCheck());
+        animator = thrustBar.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,28 +38,30 @@ public class BallController : MonoBehaviour
 
         if (!move)
         {
-            thrustUI.SetActive(false);
+            // thrustUI.SetActive(false);
             directionArrow.gameObject.SetActive(true);
+            if (Input.GetKeyDown("space")){
+                // impulse
+                // thrust = 5.0f;
+                thrustUI.SetActive(true);
+                animator.SetBool("thrustStart",true);
+                spaceHold = true;
+                StartCoroutine("thrustStrength");
+            }
+            if (Input.GetKeyUp("space")){
+                animator.SetBool("thrustStart",false);
+                spaceHold = false;
+                rb.AddForce(transform.right *thrust, ForceMode2D.Impulse);
+                shoot.Invoke();
+            }
         }else{
             directionArrow.gameObject.SetActive(false);
-            thrustUI.SetActive(true);
         }
+        // print("spaceHold = " + spaceHold);
         
         lastPos = transform.position;
 
-        if (Input.GetKeyDown("space")){
-            // impulse
-            // thrust = 5.0f;
-            spaceHold = true;
-            thrustUI.SetActive(true);
-            StartCoroutine(thrustStrength());
-        }
-        if (Input.GetKeyUp("space")){
-            spaceHold = false;
-            print("thrustEnd = " + thrust);
-            rb.AddForce(transform.right *thrust, ForceMode2D.Impulse);
-            print("transform.up = "+ transform.up);
-        }
+        
 
 
 
@@ -84,14 +91,14 @@ public class BallController : MonoBehaviour
 
             if (sw)
             {
-                thrust++;
+                thrust+=4;
             }else{
-                thrust--;
+                thrust+=-4;
             }
-            print("thrust = " + thrust);
-            thrustUI.GetComponent<Text>().text = thrust.ToString();;
+            // thrustUI.GetComponent<Text>().text = thrust.ToString();
             cont++;
-            yield return new WaitForSeconds(1);
+            // print("thrust = " + thrust);
+            yield return new WaitForSeconds(0.20f);
         }
         yield break;
     }

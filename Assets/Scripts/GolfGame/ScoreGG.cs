@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class ScoreGG : MonoBehaviour
+public class ScoreGG : NetworkBehaviour
 {
     [SerializeField] float iniScore;
     [SerializeField] float shootNum;
     [SerializeField] GameObject restartBtn;
+    NetworkVariable<float> score = new NetworkVariable<float>(
+        readPerm: NetworkVariableReadPermission.Everyone,
+        writePerm: NetworkVariableWritePermission.Owner);
     float quitScore;
     // Start is called before the first frame update
     void Start()
     {
         gameObject.SetActive(false);
-        quitScore = iniScore / shootNum;
         BallController.shoot.AddListener(calcScore);
         Goal.endGame.AddListener(showText);
         GameOverGG.gameOver.AddListener(showTextGameOver);
+        score.Value = iniScore;
+        quitScore = iniScore / shootNum;
     }
 
     // Update is called once per frame
@@ -31,8 +36,8 @@ public class ScoreGG : MonoBehaviour
     }
     
     void calcScore(){
-        iniScore = iniScore - quitScore;
-        GetComponent<Text>().text = "Final Score " + iniScore;
+        score.Value = score.Value - quitScore;
+        GetComponent<Text>().text = "Final Score " + score.Value;
     }
 
     void showTextGameOver(){

@@ -22,7 +22,7 @@ public class GameOverGG : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if (other.tag == "Ball")
         {
-            Time.timeScale = 0;
+            // Time.timeScale = 0;
             gameOver.Invoke();
         }
     }

@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DungeonGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SpaceInvaders.unity
     guid: 7cb122d0204ef574ea7868c10109de13
+  - enabled: 1
+    path: Assets/Scenes/GolfGame.unity
+    guid: 31dc42f3b80825440981798d02686d79
   m_configObjects: {}

@@ -21,6 +21,8 @@ TagManager:
   - LifeUp
   - Attack
   - PlayerSpawn
+  - ThrustBk
+  - Camera
   layers:
   - Default
   - TransparentFX

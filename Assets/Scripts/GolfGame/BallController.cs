@@ -3,63 +3,80 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Unity.Netcode;
+using Cinemachine;
 
-public class BallController : MonoBehaviour
+public class BallController : NetworkBehaviour
 {
     // Start is called before the first frame update
     Transform directionArrow;
     Rigidbody2D rb;
     float thrust;
     bool spaceHold;
-    [SerializeField] GameObject thrustUI; 
+    GameObject thrustUI; 
     Vector3 lastPos;
     bool move;
     public static UnityEvent shoot = new UnityEvent();
-    [SerializeField] GameObject thrustBar;
+    // GameObject thrustBar;
     Animator animator;
+
+    public override void OnNetworkSpawn(){
+        if (IsOwner)
+        {
+            GameObject camera = GameObject.FindWithTag("Camera");
+            camera.GetComponent<CinemachineVirtualCamera>().Follow = gameObject.transform;
+        }
+    }
     void Start()
     {
-        directionArrow = gameObject.transform.GetChild(0);
-        rb = GetComponent<Rigidbody2D>();
-        directionArrow.gameObject.SetActive(false);
-        thrustUI.SetActive(false);
-        thrust = 5.0f;
-        StartCoroutine(moveCheck());
-        animator = thrustBar.GetComponent<Animator>();
+        if (IsOwner)
+        {
+            directionArrow = gameObject.transform.GetChild(0);
+            rb = GetComponent<Rigidbody2D>();
+            directionArrow.gameObject.SetActive(false);
+            thrustUI = GameObject.FindWithTag("ThrustBk");
+            thrustUI.SetActive(false);
+            thrust = 5.0f;
+            StartCoroutine(moveCheck());
+            animator = thrustUI.GetComponent<Animator>();
+        }
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        float horizontal = Input.GetAxis("Horizontal");
-        // float vertical = Input.GetAxis("Vertical");
-        // directionArrow.gameObject.SetActive(true);
-        transform.Rotate(0, 0, -horizontal, Space.World);
-
-        if (!move)
+    {
+        if (IsOwner)
         {
-            // thrustUI.SetActive(false);
-            directionArrow.gameObject.SetActive(true);
-            if (Input.GetKeyDown("space")){
-                // impulse
-                // thrust = 5.0f;
-                thrustUI.SetActive(true);
-                animator.SetBool("thrustStart",true);
-                spaceHold = true;
-                StartCoroutine("thrustStrength");
+            float horizontal = Input.GetAxis("Horizontal");
+            // float vertical = Input.GetAxis("Vertical");
+            // directionArrow.gameObject.SetActive(true);
+            transform.Rotate(0, 0, -horizontal, Space.World);
+
+            if (!move)
+            {
+                // thrustUI.SetActive(false);
+                directionArrow.gameObject.SetActive(true);
+                if (Input.GetKeyDown("space")){
+                    // impulse
+                    // thrust = 5.0f;
+                    thrustUI.SetActive(true);
+                    animator.SetBool("thrustStart",true);
+                    spaceHold = true;
+                    StartCoroutine("thrustStrength");
+                }
+                if (Input.GetKeyUp("space")){
+                    animator.SetBool("thrustStart",false);
+                    spaceHold = false;
+                    rb.AddForce(transform.right *thrust, ForceMode2D.Impulse);
+                    shoot.Invoke();
+                }
+            }else{
+                directionArrow.gameObject.SetActive(false);
             }
-            if (Input.GetKeyUp("space")){
-                animator.SetBool("thrustStart",false);
-                spaceHold = false;
-                rb.AddForce(transform.right *thrust, ForceMode2D.Impulse);
-                shoot.Invoke();
-            }
-        }else{
-            directionArrow.gameObject.SetActive(false);
+            // print("spaceHold = " + spaceHold);
+            
+            lastPos = transform.position;
         }
-        // print("spaceHold = " + spaceHold);
-        
-        lastPos = transform.position;
 
         
 

@@ -23,6 +23,8 @@ TagManager:
   - PlayerSpawn
   - ThrustBk
   - Camera
+  - Menu
+  - Lobby
   layers:
   - Default
   - TransparentFX

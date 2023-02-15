@@ -21,7 +21,7 @@ public class Goal : NetworkBehaviour
      void OnTriggerEnter2D(Collider2D other){
         if (other.tag == "Ball")
         {
-            // Time.timeScale = 0;
+            Time.timeScale = 0;
             endGame.Invoke();
         }
     }

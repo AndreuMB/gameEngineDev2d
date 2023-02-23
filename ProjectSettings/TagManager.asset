@@ -25,6 +25,8 @@ TagManager:
   - Camera
   - Menu
   - Lobby
+  - PlayerTag
+  - PlayerUI
   layers:
   - Default
   - TransparentFX

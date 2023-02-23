@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class NetworkController : NetworkBehaviour
+public class NetworkController : MonoBehaviour
 {
     void Start(){
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            player.GetComponent<Text>().text="";
-        }
+        // foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        // {
+        //     player.GetComponent<Text>().text="";
+        // }
     }
 
     public void startServer(){
@@ -27,28 +27,28 @@ public class NetworkController : NetworkBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
-    public override void OnNetworkSpawn(){
-        print("new player");
-        if(IsOwner){
-            GameObject.Find("Menu").SetActive(false);
-        }
+    // public override void OnNetworkSpawn(){
+    //     // print("new player");
+    //     // if(IsOwner){
+    //     //     GameObject.Find("Menu").SetActive(false);
+    //     // }
 
-    }
+    // }
 
     void Update(){
-        if (IsServer)
-        {
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            print(players.Length);
-            print("NetworkManager.Singleton.ConnectedClients = "+NetworkManager.Singleton.ConnectedClients.Count);
-            int playerNum = NetworkManager.Singleton.ConnectedClients.Count-1;
+        // if (IsServer)
+        // {
+        //     GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        //     print(players.Length);
+        //     print("NetworkManager.Singleton.ConnectedClients = "+NetworkManager.Singleton.ConnectedClients.Count);
+        //     int playerNum = NetworkManager.Singleton.ConnectedClients.Count-1;
 
-            if (players.Length < 4)
-            {
-                GameObject.FindGameObjectsWithTag("Player")[playerNum].GetComponent<Text>().text = "Player "+playerNum;
+        //     if (players.Length < 4)
+        //     {
+        //         GameObject.FindGameObjectsWithTag("Player")[playerNum].GetComponent<Text>().text = "Player "+playerNum;
                 
-            }
-        }
+        //     }
+        // }
     }
 
 }
